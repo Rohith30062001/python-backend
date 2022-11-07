@@ -79,9 +79,9 @@ def search(id):
     #print(res)
     rows=cursor.fetchall()
     if rows !=[]:
-        return jsonify(rows)
+        return render_template("search.html",data=rows)
     else:
-        return "No Data Found"
+        return '<h2 style="color: red;"><center> Employee Not Found </center></h2>'
     #return redirect("http://127.0.0.1:5000/",code=302) 
    
 
