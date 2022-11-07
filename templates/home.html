@@ -1,0 +1,38 @@
+<h3><center>Welcome To Home Page</center></h3>
+<center>
+<div>
+
+    <br>
+    <h3>Employee Form</h3>
+    <form onsubmit="window.location = 'http://127.0.0.1:5000/insert/' + employeename.value + '/' + employeenumber.value + '/' + employeepassword.value + '/' + employeeemail.value  ; return false;">
+        <input id="employeename"  type="text" name="employeename" placeholder="EmployeeName"></input> <br><br>
+        
+        <input id="employeenumber"  type="text" name="employeenumber" placeholder="EmployeeNumber"></input> <br><br>
+
+        <input id="employeepassword"  type="text" name="employeepassword" placeholder="EmployeePassword"></input> <br><br>
+
+        <input id="employeeemail"  type="text" name="employeeemail" placeholder="EmployeeEmail"></input> <br><br>
+
+
+        <input type="submit" value="Submit">
+    </form>
+
+
+
+    <form onsubmit="window.location = 'http://127.0.0.1:5000/search/' + search.value; return false;">
+        <input id="search"  type="number" name="search" placeholder="Enter Employee Id"></input>
+        <input type="submit" value="Search">
+    </form>
+
+    <br><br>
+
+    
+    <form onsubmit="window.location = 'http://127.0.0.1:5000/delete/' + del.value; return false;">
+        <input id="delete"  type="number" name="del" placeholder="Enter Employee Id"></input>
+        <input type="submit" value="Delete">
+    </form>
+
+</div>
+
+
+</center>

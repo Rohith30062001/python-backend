@@ -1,5 +1,5 @@
 import mysql.connector as mysql
-from flask import jsonify,Flask
+from flask import jsonify,Flask,render_template,redirect
 
 
 id=0
@@ -12,9 +12,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Welcome To Employee DB'
+    #return 'Welcome To Employee DB'
+    return render_template("home.html")
 
-@app.route('/insert/<employeename>/<employeenumber>/<employeepassword>/<employeeemail>')
+@app.route('/insert/<employeename>/<employeenumber>/<employeepassword>/<employeeemail>',methods = ['POST', 'GET'])
 def insert(employeename,employeenumber,employeepassword,employeeemail):
     #employeename="python"
     #employeenumber="1111111"
@@ -25,7 +26,8 @@ def insert(employeename,employeenumber,employeepassword,employeeemail):
     values=(employeename,employeenumber,employeepassword,employeeemail)
     cursor.execute(query,values)
     db.commit()
-    return f"record_inserted,{id}"
+    return redirect("http://127.0.0.1:5000/",code=302)
+    return "inserted successfully"
 
    
 
@@ -59,26 +61,30 @@ def truncate():
     db.commit()
     return "SuccessFulLy Deleted Data In Table"
 
-@app.route('/delete/<int:id>',methods = ['DELETE'])
+@app.route('/delete/<int:id>',methods = ['get'])
 def delete(id):
     #id=int(input())
     #id=int(input())
     query=f"DELETE FROM EMPLOYEETABLE WHERE ID={id}"
     cursor.execute(query)
     db.commit()
-    return ("SuccessFulLy Deleted Data In Table")
+    #return ("SuccessFulLy Deleted Data In Table")
+    return redirect("http://127.0.0.1:5000/",code=302)
 
-@app.route('/search/<int:id>')
+@app.route('/search/<int:id>',methods = ['POST', 'GET'])
 def search(id):
     #id=int(input())
     query=f"SELECT EMPLOYEENAME,EMPLOYEENUMBER,EMPLOYEEPASSWORD,EMPLOYEEEMAIL FROM EMPLOYEETABLE WHERE ID={id}"
     res=cursor.execute(query)
     #print(res)
     rows=cursor.fetchall()
-    return jsonify(rows)
-    
-
+    if rows !=[]:
+        return jsonify(rows)
+    else:
+        return "No Data Found"
+    #return redirect("http://127.0.0.1:5000/",code=302) 
+   
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
