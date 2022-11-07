@@ -81,7 +81,7 @@ def search(id):
     if rows !=[]:
         return render_template("search.html",data=rows)
     else:
-        return '<h2 style="color: red;"><center> Employee Not Found </center></h2>'
+        return '<body style="background-color: rgb(85, 153, 131);"><h2 style="color: red;"><center> Employee Not Found </center></h2></body>'
     #return redirect("http://127.0.0.1:5000/",code=302) 
    
 
